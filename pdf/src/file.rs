@@ -512,6 +512,9 @@ where
     SC: Cache<Result<Arc<[u8]>, Arc<PdfError>>>,
     L: Log,
 {
+    pub fn save(&mut self) -> Result<&[u8]> {
+        self.storage.save(&mut self.trailer)
+    }
     pub fn save_to(&mut self, path: impl AsRef<Path>) -> Result<()> {
         std::fs::write(path, self.storage.save(&mut self.trailer)?)?;
         Ok(())
